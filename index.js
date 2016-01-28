@@ -1,34 +1,42 @@
-export default function (/*debug*/) {
-  this.filter("flatten", (data, options) => {
-  /**
-    @overview A filter plugin returns an object { code, map, ext }
-    which is the result of transforming the incomding data source:
+const fs = require('fs')
+const path = require('path')
 
-      return { code, map, ext }
+export default function () {
+  this.flatten = function (options = {}) {
+    const levels = options.levels || 0
 
-    @example Sync filter `j` that transforms a given string into an
-    object, i.e, {code, map} where code is the result data and map
-    a sourcemap if `options.sourceMap === true`.
+    this.unwrap().then(files => {
+      let output = []
 
-      const j = require("my-js-transformer")
-      const assign = require("object-assign")
-
-      export default function () {
-        return this.filter("j", (data, options) => {
-          return assign({ ext: ".js"}, j.render(data.toString(), options))
-        })
+      for (let file of files) {
+        if (!fs.statSync(file).isDirectory()) {
+          const base = path.basename(file)
+          const dirs = (levels > 0) ? (getDirectories(file, levels) + '/') : ''
+          output.push(dirs+base)
+        }
       }
 
-    @example Async filter `s` that transforms a given string and invokes
-    a callback function with an object, i.e, {css, map}.
+      // truncated file paths are here
+      // need to relate each one to its original data stream
+      console.log( output )
 
-    const s = require("my-style-trasformer")
-    const assign = require("object-assign")
+      return output
+    })
 
-    export default function () {
-      return this.defer(s.render)(data.toString(), options).then((result) =>
-        assign({ ext: ".css"}, result))
-    }
-  */
-  })
+    return this
+  }
+}
+
+function getDirectories(file, levels) {
+  let dirs = path.dirname(file)
+  dirs = (dirs[0] == '/') ? dirs.substr(1) : dirs
+
+  const arr = dirs.split('/')
+  const len = arr.length
+
+  if (levels >= len) {
+    return dirs
+  }
+
+  return arr.splice(len - levels).join('/')
 }
