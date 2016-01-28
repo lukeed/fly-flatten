@@ -21,17 +21,30 @@
 npm install -D fly-flatten
 ```
 
+### API
+#### levels
+
+*The number of parent directory levels to include.*
+
+Default: 0
+
 ### Example
 
 ```js
-export default function* () {
-  yield ...
+export function* images() {
+  const src = ['app/images/**/*.{jpg,png,gif}']
+
+  yield this.source(src)
+    .flatten({
+      levels: 1
+    })
+    .target('dist/img')
 }
 ```
 
 ## License
 
-[MIT][mit] © [luke][author] et [al][contributors]
+[MIT][mit] © [Luke Edwards][author] et [al][contributors]
 
 
 [mit]:          http://opensource.org/licenses/MIT

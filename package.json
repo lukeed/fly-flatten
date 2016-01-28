@@ -8,10 +8,11 @@
   "files": [
     "index.js"
   ],
-  "keywords":[
+  "keywords": [
     "fly",
     "fly-plugin",
-    "flatten"
+    "flatten",
+    "glob"
   ],
   "scripts": {
     "lint": "eslint *.js",
