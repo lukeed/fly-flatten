@@ -1,6 +1,6 @@
 {
   "name": "fly-flatten",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "DEPRECATED -- Flattens all files within a glob selection into a single level.",
   "license": "MIT",
   "repository": "https://github.com/lukeed/fly-flatten",
