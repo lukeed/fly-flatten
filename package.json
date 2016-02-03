@@ -1,10 +1,9 @@
 {
   "name": "fly-flatten",
   "version": "0.0.0",
-  "description": "Flattens all files within a glob selection into a single level.",
+  "description": "DEPRECATED -- Flattens all files within a glob selection into a single level.",
   "license": "MIT",
   "repository": "https://github.com/lukeed/fly-flatten",
-  "main": "index.js",
   "files": [
     "index.js"
   ],
@@ -15,13 +14,7 @@
     "glob"
   ],
   "scripts": {
-    "lint": "eslint *.js",
-    "setup": "npm i && npm test",
-    "spec": "npm run test | tspec",
-    "test": "npm run lint && npm run tape",
-    "build": "echo No build task specified.",
-    "deploy": "npm run test && git push origin master && npm publish",
-    "tape": "node --harmony --harmony_arrow_functions ./node_modules/tape/bin/tape test/*.js"
+    "test": "echo DEPRECATED. Integrated in Fly ^0.8.8! -- https://github.com/bucaran/fly/pull/135"
   },
   "author": {
     "name": "luke",
@@ -31,9 +24,6 @@
   "dependencies": {
   },
   "devDependencies": {
-    "eslint": "^1.10.0",
-    "tap-spec": "^4.1.1",
-    "tape": "^4.2.2"
   },
   "engines": {
     "iojs": ">= 1.0.0",

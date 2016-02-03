@@ -4,7 +4,7 @@
   </a>
 </div>
 
-> [Flatten](https://github.com/lukeed/fly-flatten) plugin for _[Fly][fly]_.
+> DEPRECATED - [Flatten](https://github.com/lukeed/fly-flatten) all files within a glob selection into a single level.
 
 [![][fly-badge]][fly]
 [![npm package][npm-ver-link]][releases]
@@ -13,34 +13,7 @@
 [![][mit-badge]][mit]
 
 ## Usage
-> Check out the [documentation](PLUGIN_DOCUMENTATION) to see the available options.
-
-### Install
-
-```a
-npm install -D fly-flatten
-```
-
-### API
-#### levels
-
-*The number of parent directory levels to include.*
-
-Default: 0
-
-### Example
-
-```js
-export function* images() {
-  const src = ['app/images/**/*.{jpg,png,gif}']
-
-  yield this.source(src)
-    .flatten({
-      levels: 1
-    })
-    .target('dist/img')
-}
-```
+DEPRECATED! Integrated into core of Fly@^0.8.8. Check out [this PR](https://github.com/bucaran/fly/pull/135).
 
 ## License
 
