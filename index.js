@@ -1,3 +1,5 @@
+'use strict';
+
 const path = require('path');
 const normalize = path.normalize;
 const sep = path.sep;
