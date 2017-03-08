@@ -1,7 +1,7 @@
 {
   "name": "fly-flatten",
   "version": "1.0.0",
-  "description": "Flatten all sources files to specified maximum of sub-directories.",
+  "description": "Flatten all source files to a specified maximum of sub-directories.",
   "repository": "https://github.com/lukeed/fly-flatten",
   "license": "MIT",
   "files": [

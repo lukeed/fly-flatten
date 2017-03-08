@@ -1,6 +1,6 @@
 # fly-flatten [![][travis-badge]][travis-link]
 
-> Flatten all sources files to specified maximum of sub-directories.
+> Flatten all source files to a specified maximum of sub-directories.
 
 A source's directory structure isn't always desirable in the output. With `fly-flatten`, you may dictate how many _parent directories_ of a file to keep.
 
