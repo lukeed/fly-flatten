@@ -1,7 +1,7 @@
 {
   "name": "fly-flatten",
   "version": "0.0.1",
-  "description": "Flatten all files within a glob selection into a single level.",
+  "description": "Flatten all sources files to specified maximum of sub-directories.",
   "repository": "https://github.com/lukeed/fly-flatten",
   "license": "MIT",
   "files": [

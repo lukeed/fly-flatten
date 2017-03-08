@@ -1,34 +1,106 @@
-<div align="center">
-  <a href="http://github.com/flyjs/fly">
-    <img width=200px  src="https://cloud.githubusercontent.com/assets/8317250/8733685/0be81080-2c40-11e5-98d2-c634f076ccd7.png">
-  </a>
-</div>
+# fly-flatten [![][travis-badge]][travis-link]
 
-> DEPRECATED - [Flatten](https://github.com/lukeed/fly-flatten) all files within a glob selection into a single level.
+> Flatten all sources files to specified maximum of sub-directories.
 
-[![][fly-badge]][fly]
-[![npm package][npm-ver-link]][releases]
-[![][dl-badge]][npm-pkg-link]
-[![][travis-badge]][travis-link]
-[![][mit-badge]][mit]
+A source's directory structure isn't always desirable in the output. With `fly-flatten`, you may dictate how many _parent directories_ of a file to keep.
+
+## Install
+
+```a
+npm install --save-dev fly-flatten
+```
 
 ## Usage
-DEPRECATED! Integrated into core of Fly@^0.8.8. Check out [this PR](https://github.com/bucaran/fly/pull/135).
+
+```sh
+src
+├── images
+│   ├── img.jpg
+│   ├── foo
+│      ├── foo.jpg
+│      ├── bar
+│         ├── bar.jpg
+```
+
+```js
+exports.images = function * (fly) {
+  yield fly.source('src/images/**/*.jpg').flatten({ levels: 1 }).target('dist/img');
+}
+```
+
+```sh
+# output
+dist
+├── img
+│   ├── img.jpg
+│   ├── foo
+│      ├── foo.jpg
+│   ├── bar
+│      ├── bar.jpg
+```
+
+## API
+
+### .flatten(options)
+
+#### options.levels
+
+Type: `Number`<br>
+Default: `0`
+
+The number of sub-directories allowed **in relation to** your glob root.
+
+
+## Examples
+
+All examples use the [demo file tree](#usage) listed above.
+
+### Level: 0
+
+No parent directories are kept.
+
+> **Note:** The `img` directory is kept because we've used `.target('dist/img')`.
+
+```
+dist
+├── img
+│   ├── img.jpg
+│   ├── foo.jpg
+│   ├── bar.jpg
+```
+
+### Level: 1
+
+Each file is allowed to keep 1 parent directory.
+
+```
+dist
+├── img
+│   ├── img.jpg
+│   ├── foo
+│      ├── foo.jpg
+│   ├── bar
+│      ├── bar.jpg
+```
+
+### Level: 5
+
+Our file tree is **only** 2 levels deep (`images [0]/foo [1]/bar [2]/bar.jpg`). Because our "allowed levels" exceeds our tree depth, `fly-flatten` won't do anthing and so the entire structure will be copied.
+
+```sh
+dist
+├── img
+│   ├── img.jpg
+│   ├── foo
+│      ├── foo.jpg
+│      ├── bar
+│         ├── bar.jpg
+```
+
 
 ## License
 
-[MIT][mit] © [Luke Edwards][author] et [al][contributors]
+MIT © [Luke Edwards](https://lukeed.com)
 
-
-[mit]:          http://opensource.org/licenses/MIT
-[author]:       https://lukeed.com
-[contributors]: https://github.com/lukeed/fly-flatten/graphs/contributors
-[releases]:     https://github.com/lukeed/fly-flatten/releases
-[fly]:          https://www.github.com/flyjs/fly
-[fly-badge]:    https://img.shields.io/badge/fly-JS-05B3E1.svg?style=flat-square
-[mit-badge]:    https://img.shields.io/badge/license-MIT-444444.svg?style=flat-square
-[npm-pkg-link]: https://www.npmjs.org/package/fly-flatten
-[npm-ver-link]: https://img.shields.io/npm/v/fly-flatten.svg?style=flat-square
-[dl-badge]:     http://img.shields.io/npm/dm/fly-flatten.svg?style=flat-square
 [travis-link]:  https://travis-ci.org/lukeed/fly-flatten
 [travis-badge]: http://img.shields.io/travis/lukeed/fly-flatten.svg?style=flat-square
